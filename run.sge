@@ -1,0 +1,25 @@
+#!/bin/bash
+#Google SGE qsub submission
+#shell to use
+#$ -S /bin/bash
+#$ -N Dsim1
+#$ -cwd
+#$ -V
+#$ -o o
+#$ -e o_error
+#$ -l h=!hive1-new
+
+#environement modules 
+source /etc/profile.d/modules.sh
+module load openmpi-1.6.5-intel
+
+export PYTHONPATH=$PYTHONPATH:/scratch/home/wenjia/lammps18/python
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/scratch/home/wenjia/lammps18/src
+
+export OMP_NUM_THREADS=1
+
+source /scratch/software/anaconda/bin/activate fenicsproject
+
+
+python main.py < clf_input.txt
+

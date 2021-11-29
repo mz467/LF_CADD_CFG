@@ -1,0 +1,47 @@
+# 2d simulation
+
+dimension	2
+boundary	s s p
+
+atom_style	atomic
+atom_modify	map array
+
+neighbor	0.3 bin
+#neigh_modify	exclude type 3 3
+neigh_modify	every 1 delay 0 check yes
+
+
+# create geometry
+
+lattice		hex 0.93
+
+read_data	atoms.lammps
+
+# LJ potentials -> ductile potential
+
+pair_style      table linear 2500
+pair_coeff      * * da_potential_2dA dummy
+
+# define groups
+
+group		atomistic_region type 1
+group		interface type 2
+group		pad_atoms type 3
+
+# ---------- Temperature Fixes ----------
+
+fix		1 pad_atoms setforce 0.0 0.0 0.0
+
+timestep	0.003
+
+#thermo		200
+#thermo_style	custom step pe temp pxx pyy pzz pxy pxz pyz
+
+#==========Minimization=========
+dump 		1 all cfg 1000000000 dump.min_*.cfg mass type xsu ysu zsu vx vy vz
+min_style 	sd
+minimize 	0.0 1.0e-3 10000 10000
+undump 		1
+#===============================
+
+

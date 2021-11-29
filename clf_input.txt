@@ -1,0 +1,30 @@
+# ----- Fatigue sim ettings -----
+
+1-output # trial id
+
+9.0 # delta_K_I
+
+0.25 # R_value 
+
+100 # number of cycles
+
+0.1 # loading/unloading increment
+
+# ----- Elastic constants ----- 
+
+26.52203 # 3D Young's modulus
+0.25  # Poisson's ratio
+
+# ----- Data file names ----- 
+
+300x150-5000_crack-25_atoms.inp  # filename of the prepared atom_data
+300x150-5000_crack-25.xml  # filename of the mesh
+
+# ----- Initial crack tip position ----- 
+
+-125.0 # original crack tip position x
+0.0 # original crack tip position y
+
+
+##########
+# Note: Please do not change the explanations above. Parameter value and its explanation should be kept in the same line.
